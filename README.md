@@ -1,3 +1,6 @@
+# Nomes
+Gabriel Ferreira Silva & Matheus Salgado Caldeira
+
 # Controle de Estoque
 
 Sistema inicial de cadastro e consulta de produtos com Java, Spring Boot, Spring MVC, Thymeleaf, Spring Data JPA e H2.
