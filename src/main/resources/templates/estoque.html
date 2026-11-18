@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque | Estoque Fácil</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" th:href="@{/cadastro}">Estoque<span>Fácil</span></a>
+    <nav>
+        <a th:href="@{/cadastro}">Cadastrar produto</a>
+        <a class="active" th:href="@{/estoque}">Estoque</a>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="intro intro-row">
+        <div>
+            <p class="eyebrow">GERENCIAMENTO</p>
+            <h1>Estoque</h1>
+            <p>Consulte os produtos cadastrados e o valor disponível em estoque.</p>
+        </div>
+        <a class="button button-primary" th:href="@{/cadastro}">+ Novo produto</a>
+    </section>
+
+    <div class="success-message" th:if="${mensagem}" th:text="${mensagem}"></div>
+
+    <section class="panel table-panel" th:if="${!#lists.isEmpty(produtos)}">
+        <div class="table-scroll">
+            <table>
+                <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Valor unitário</th>
+                    <th>Valor total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="produto : ${produtos}">
+                    <td class="product-name" th:text="${produto.nome}"></td>
+                    <td th:text="${produto.quantidade}"></td>
+                    <td th:text="${'R$ ' + #numbers.formatDecimal(produto.preco, 1, 'POINT', 2, 'COMMA')}"></td>
+                    <td class="total-value" th:text="${'R$ ' + #numbers.formatDecimal(produto.valorTotal, 1, 'POINT', 2, 'COMMA')}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="panel empty-state" th:if="${#lists.isEmpty(produtos)}">
+        <div class="empty-icon">▤</div>
+        <h2>Nenhum produto cadastrado</h2>
+        <p>Quando você cadastrar um produto, ele aparecerá nesta tabela.</p>
+        <a class="button button-primary" th:href="@{/cadastro}">Cadastrar primeiro produto</a>
+    </section>
+</main>
+</body>
+</html>

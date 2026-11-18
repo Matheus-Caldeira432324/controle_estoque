@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar produto | Estoque Fácil</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" th:href="@{/cadastro}">Estoque<span>Fácil</span></a>
+    <nav>
+        <a class="active" th:href="@{/cadastro}">Cadastrar produto</a>
+        <a th:href="@{/estoque}">Estoque</a>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="intro">
+        <p class="eyebrow">CONTROLE DE PRODUTOS</p>
+        <h1>Cadastrar produto</h1>
+        <p>Preencha as informações para adicionar um produto ao estoque.</p>
+    </section>
+
+    <section class="panel form-panel">
+        <form th:action="@{/cadastro}" th:object="${produto}" method="post">
+            <div class="field">
+                <label for="nome">Nome do produto</label>
+                <input id="nome" type="text" th:field="*{nome}" placeholder="Ex.: Teclado" maxlength="100" required>
+                <small class="field-error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></small>
+            </div>
+
+            <div class="form-row">
+                <div class="field">
+                    <label for="preco">Preço unitário (R$)</label>
+                    <input id="preco" type="number" th:field="*{preco}" placeholder="0,00" min="0.01" step="0.01" required>
+                    <small class="field-error" th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}"></small>
+                </div>
+                <div class="field">
+                    <label for="quantidade">Quantidade</label>
+                    <input id="quantidade" type="number" th:field="*{quantidade}" placeholder="0" min="0" step="1" required>
+                    <small class="field-error" th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}"></small>
+                </div>
+            </div>
+
+            <button class="button button-primary" type="submit">Cadastrar produto</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>
